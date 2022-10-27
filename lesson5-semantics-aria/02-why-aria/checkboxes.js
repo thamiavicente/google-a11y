@@ -19,6 +19,14 @@
 
     this.el.addEventListener('keydown', this.handleKeyDown.bind(this));
     this.el.addEventListener('click', this.toggle.bind(this));
+
+    //Initialize role and aria-checked state
+    //The course solution propose add it in js,
+    //but I choose insert in html
+    // this.el.setAttribute('role', 'checkbox');
+    // if(this.el.hasAttribute('checked'))
+    //   this.el.setAttribute('aria-checked', 'true');
+    // else this.el.setAttribute('aria-checked', 'false');
   }
 
   Checkbox.prototype.handleKeyDown = function(e) {
@@ -32,10 +40,14 @@
   };
 
   Checkbox.prototype.toggle = function() {
-    if (this.el.hasAttribute('checked'))
+    if (this.el.hasAttribute('checked') || this.el.ariaChecked == true) {
       this.el.removeAttribute('checked');
-    else
+      this.el.ariaChecked = false;
+  }
+    else {
       this.el.setAttribute('checked', '');
+      this.el.ariaChecked = true;
+    }
   };
 
   var checkboxes = slice(document.querySelectorAll('.checkbox'));
